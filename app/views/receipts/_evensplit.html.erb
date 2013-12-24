@@ -1,0 +1,38 @@
+<div class="alert alert-dismissable alert-danger" id="error-hidden">
+  <a class="close" data-dismiss="alert">&#215;</a>
+  <span id="friend_error"></span>
+</div>
+<!-- adding purchases -->
+<div class="col-sm-12 newsfeed">
+  <div class="list-group" id="fullReceipt">
+    <div class="list-group-item active">
+      <div class='row centered'>
+        <!-- form to create a new purchase using a name and a phone number -->
+        <%= form_tag('/purchases', :remote => true) do %>
+          <%= hidden_field_tag 'receipt_id', @receipt.id %>
+          <%= hidden_field_tag 'purchase_type', "Split Evenly" %>
+          <span class="col-sm-3 col-sm-offset-1 col-xs-11">
+            <%= text_field_tag 'owner_name', nil, :placeholder => 'enter name', class: 'form-control' %>
+          </span>
+          <br class="visible-xs">
+          <br class="visible-xs">
+          <br class="visible-xs">
+          <span class="col-sm-3 col-xs-11">
+            <%= text_field_tag 'owner_phone_number', nil, :placeholder => 'enter phone number', class: 'form-control' %>
+          </span>
+          <br class="visible-xs">
+          <br class="visible-xs">
+          <br class="visible-xs">
+          <span class="col-sm3 col-xs11">
+            <button id="addUserToReceipt" class=" col-xs-10 col-sm-3 btn btn-success">Add Person</button>
+          </span>
+        <% end %>
+      </div>
+    </div>
+
+  <!-- display purchases -->
+    <% @receipt.purchases.each do |purchase| %>
+      <%= render 'purchases/evensplitpurchase', :purchase => purchase %>
+    <% end %>
+  </div>
+</div>

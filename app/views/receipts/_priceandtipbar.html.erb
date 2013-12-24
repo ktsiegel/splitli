@@ -1,0 +1,41 @@
+<!-- receipt creation: delete receipt; input total amount and tip; send charge -->
+
+<%= form_for @receipt do |f| %>
+<div class="row">
+  <div class="col-sm-2 col-xs-12">
+    <!-- this is the button that deletes a receipt. a receipt can only be deleted if it has not already been sent -->
+    <% if !@receipt.been_sent %>
+      <%= link_to "Delete", @receipt, method: :delete, class: 'col-sm-12 col-xs-12 button-padded-bottom btn btn-danger' %>
+    <% end %>
+  </div>
+  <div class="col-sm-8">
+    <span class="btn-group btn-group-justified" id="itemized-btn">
+      <%= link_to "Itemize", receipts_url(split_type: 'Itemize', receipt: {title: @receipt.title}, old_receipt_id: @receipt.id), method: :post, class: 'btn btn-default col-sm-1', id: 'itemize-btn-sub' %>
+      <span class="col-sm-6 btn btn-default active">Split Evenly</span>
+    </span>
+  </div>
+  <div class="col-sm-2 col-xs-12">
+    <!-- this is the button that sends a receipt. a receipt can only be sent if it has not already been sent -->
+    <% if !@receipt.been_sent %>
+      <%= f.submit 'Send', class: 'col-sm-12 col-xs-12 button-padded-bottom btn btn-success' %>
+    <% end %>
+  </div>
+</div>
+  <div class="row row-padded">
+    <span class="col-sm-3 col-sm-offset-2">
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <%= f.text_field :total_amount, class: 'form-control button-padded-bottom', placeholder: 'total' %>
+      </div>
+    </span>
+    <span class="col-sm-2">
+      <%= check_box_tag 'tax', 'yes', true -%><span class='total-includes-tax'>Includes tax?</span>
+    </span>
+    <span class="col-sm-3">
+      <div class="input-group">
+        <span class="input-group-addon">%</span>
+        <%= f.text_field :tip, class: 'form-control button-padded-bottom', placeholder: 'tip' %>
+      </div>
+    </span>
+  </div>
+<% end %>

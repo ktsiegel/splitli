@@ -1,0 +1,25 @@
+<!-- Primary Author: Ari Vogel-->
+
+<div class="container">
+  <div class="index-jumbotron jumbotron">  
+    <h1 class="index-header" id="index-header">
+      <% if @receipt.title and @receipt.title != '' %>
+        <%= @receipt.title %>
+      <% else %>
+        Untitled
+      <% end %>
+    </h1>
+    <br class="visible-xs">   
+    <!-- purchase aggregation options: itemize or split evenly -->
+    <% if @receipt.split_type == 'Split Evenly' %>
+      <%= render 'receipts/priceandtipbar' %>
+    <% else %>
+      <%= render 'receipts/senditemizedbar' %>
+    <% end %>
+  </div>
+  <% if @receipt.split_type == 'Split Evenly' %>
+    <%= render 'receipts/evensplit' %> 
+  <% else %>
+    <%= render 'receipts/itemize' %>
+  <% end %> 
+</div>

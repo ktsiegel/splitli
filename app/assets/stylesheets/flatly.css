@@ -1,0 +1,85 @@
+/* Flatly
+ * Bootswatch
+ *= require_self
+ *= require flatly/loader
+ *= require flatly/bootswatch
+*/
+
+/*Primary Author: Katie Siegel*/
+#itemized-btn{
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+#addUserToReceipt{
+	margin-left: 15px;
+	/*padding-right: 15px;*/
+}
+
+#friend_error {
+	font-size: 15px;
+}
+
+#error-hidden {
+	display:none;
+}
+
+.index-header {
+	text-align: center;
+}
+
+.index-jumbotron {
+	padding-bottom:5px !important;
+	padding-top: 45px !important;
+}
+
+.row-padded {
+	padding-top:10px;
+}
+
+.flash-msg {
+	position: relative;
+	top: 75px;
+	text-align: center;
+}
+
+.friends-pay-table {
+	width: 100%;
+}
+
+#coming-soon {
+	position:absolute;
+	z-index:10;
+	font-size: 20px;
+	background-color:white;
+	display:none;
+	padding:10px;
+	border:1px solid black;
+	box-shadow: 2px 2px 2px #888888;
+	top:85px;
+}
+
+ul,p {
+	margin-bottom:0px !important;
+}
+
+.table-purchase-ele {
+	padding-top:12px;
+}
+
+.table {
+	margin-top:10px;
+	margin-left: 15px;
+}
+
+.delete-purchase-button {
+	margin-left:20px;
+}
+
+.button-padded-bottom {
+	margin-bottom: 4px !important;
+}
+
+.total-includes-tax {
+	font-size: 14px;
+}

@@ -1,0 +1,28 @@
+<!-- view for itemized purchases -->
+<div class="list-group-item" id="purchase_<%= purchase.id%>">
+  <div class="row col-sm-12">
+    <div class="col-sm-2">
+      <h4 class="list-group-item-heading table-purchase-ele"><%= purchase.owner_name %></h4>
+      <p class="table-purchase-ele"><%=purchase.owner_phone_number %></p>
+    </div>
+    <div class="col-sm-9" id="fullPurchase_<%= purchase.id%>">
+      <!-- form to create a new item when the user inputs a title and an amount -->
+      <%= form_tag("/items", remote: true) do |f| -%>
+        <%= hidden_field_tag :purchase_id, purchase.id %>
+        <span class="col-sm-4"><%= text_field_tag "title", nil, class: "form-control title_"+purchase.id.to_s, placeholder: "item" -%></span>
+        <span class="col-sm-4"><%= text_field_tag "amount", nil, class: "form-control amount_"+purchase.id.to_s, placeholder: "amount (w/o tax)" -%></span>
+        <br class="visible-xs">
+        <button id="addItemToPurchase" class="btn btn-success">Add Item</button>
+        <%= link_to "Delete", purchase_url(id: purchase.id, receipt_id: @receipt.id), method: :delete, remote: true, class: "btn btn-danger delete-purchase-button" %>
+      <% end %>
+      <!-- table containing all of the items for this purchase that have already been created -->
+      <table class="table table-striped table-hover">
+          <tbody id="tbody_<%= purchase.id%>">
+            <% purchase.items.each do |item| %>
+              <%= render 'items/item', :item => item, :purchase => purchase %>
+            <% end %>
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>

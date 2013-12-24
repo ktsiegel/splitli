@@ -1,0 +1,36 @@
+<!-- view containing form used to create a new receipt -->
+<%= form_for @receipt do |f| %>
+<div class="row">
+  <div class="col-sm-2 col-xs-12">
+    <!-- this is the button that deletes a receipt. a receipt can only be deleted if it has not already been sent -->
+    <% if !@receipt.been_sent %>
+      <%= link_to "Delete", @receipt, method: :delete, class: 'col-xs-12 button-padded-bottom btn btn-danger' %>
+    <% end %>
+  </div>
+  <div class="col-sm-8 col-xs-12">
+    <!-- link to switch from itemized receipt format to split evenly format -->
+  <span class="btn-group btn-group-justified" id= "itemized-btn">
+    <span class="btn btn-default active col-sm-1" id="itemize-btn-sub">Itemize</span>
+    <%= link_to "Split Evenly", receipts_url(split_type: 'Split Evenly', receipt: {title: @receipt.title}, old_receipt_id: @receipt.id), method: :post, class: 'btn btn-default col-sm-1', id: 'itemize-btn-sub' %> 
+  </span>
+  </div>
+  <div class="col-sm-2 col-xs-12">
+    <% if !@receipt.been_sent %>
+    <!-- this is the button that sends a receipt. a receipt can only be sent if it has not already been sent -->
+      <%= f.submit 'Send', class: 'col-xs-12 button-padded-bottom btn btn-success' %>
+    <% end %>
+  </div>
+</div>
+<!-- form containing only tip and tax fields, because the total amount field is N/A in itemized view -->
+  <div class="row row-padded">
+    <span class="col-sm-4 col-sm-offset-3">
+      <div class="input-group">
+        <span class="input-group-addon">%</span>
+        <%= f.text_field :tip, class: 'form-control button-padded-bottom', placeholder: 'tip' %>
+      </div>
+    </span>
+    <span class="col-sm-2">
+      <%= check_box_tag 'tax', 'yes', true -%><span class='total-includes-tax'>Add tax? (8%)</span>
+    </span>
+  </div>
+<% end %>

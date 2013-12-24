@@ -1,0 +1,12 @@
+<!-- view for evenly split purchases -->
+<div class="list-group-item" id="purchase_<%= purchase.id%>">
+  <div class="row col-sm-12">
+    <div class="col-xs-8">
+    <div class="col-sm-5"><h4 class="list-group-item-heading table-purchase-ele"><%= purchase.owner_name %></h4></div>
+    <div class="col-sm-5"><p class="table-purchase-ele"><%= purchase.owner_phone_number %></p></div>
+    </div>
+    <div class="col-xs-3">
+    <div class="col-sm-2"><%= link_to "Delete", purchase_url(id: purchase.id, receipt_id: @receipt.id), method: :delete, :remote => true, class: "btn btn-danger" %></div>
+    </div>
+  </div>
+</div>

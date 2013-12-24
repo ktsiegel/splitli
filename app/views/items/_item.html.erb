@@ -1,0 +1,5 @@
+<tr id="item_<%= item.id%>">
+  <td class="col-sm-1"><%= item.title -%></td>
+  <td class="col-sm-1"><%= item.amount -%></td>
+  <td class="col-sm-1 delete-item-cell"><%= link_to "Delete", item_url(id: item.id, purchase_id: purchase.id), method: :delete, remote: true %></td>
+</tr>

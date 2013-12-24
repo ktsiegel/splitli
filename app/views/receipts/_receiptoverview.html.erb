@@ -1,0 +1,40 @@
+<div class="list-group-item">
+  <div class="row col-sm-12">
+
+    <!-- receipt title, amount -->
+    <div class="col-sm-4">
+      <h3 class="list-group-item-heading"><%= receipt.title %></h3>
+      <hr class="visible-xs">
+      <% if receipt.split_type == 'Split Evenly' %>
+        <p class="list-group-item-text hidden-xs">Total Amount (split evenly): <%= '$' + number_to_currency(receipt.total_amount.to_f*(1 + receipt.tip.to_f*0.01), format: "%n") %></p>
+      <% else %>
+        <p class='list-group-item-text hidden-xs'>Itemized charges</p>
+      <% end %>
+    </div>
+    
+    <!-- listing purchases -->
+    <div class="col-sm-3">
+      <p>I split this bill with: </p>
+      <ul>
+        <% receipt.purchases.each do |purchase| %>
+          <li><%= purchase.owner_name %>($<%= number_to_currency(purchase.get_total, format: "%n") %>)</li>
+        <% end %>
+      </ul>
+    </div>
+    
+    <!-- receipt status -->
+    <% if !receipt.been_sent %>
+      <div class="col-sm-2">
+        <p class='text-danger'>Charges not sent.</p>
+      </div>
+      <div class="col-sm-3">
+        <%= link_to 'Continue Process', edit_receipt_url(receipt), class: 'col-xs-12 btn btn-success' %>
+      </div>
+    <% else %>
+      <div class="col-sm-4">
+        <p class="text-success">Charges sent</p>
+      </div>
+    <% end %>
+  </div>
+  <br class="visible-xs">
+</div>

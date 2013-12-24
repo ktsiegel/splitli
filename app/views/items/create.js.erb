@@ -1,0 +1,20 @@
+//Primary author: Ari Vogel
+//if a new item is created successfully
+<% if @item != nil and @item.id != nil %>
+    <% str = render "items/item", item: @item, purchase: @purchase %>
+    <% str.gsub!(/\n/, "") %>
+    var html = $.parseHTML('<%= str.html_safe %>');
+    $(html).appendTo("#tbody_<%= @item.purchase.id %>")
+    //clear the input fields for next input
+    $(".title_<%= @purchase.id.to_s %>").val('');
+    $(".amount_<%= @purchase.id.to_s %>").val('');
+    $("#friend_error").text('');
+    $("#error-hidden").hide();
+//if an item is not successfully created
+<% else %>
+//clear the input fields for next input
+    $("#friend_error").text('Error adding item. Please make sure you submit a valid title and amount.');
+    $("#error-hidden").show();
+    $("#title").val('');
+    $("#amount").val('');
+<% end %>

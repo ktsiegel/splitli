@@ -1,0 +1,38 @@
+<!-- primary author: Katie -->
+
+<div class="container">
+    <div class="index-jumbotron jumbotron">  
+      <h1 class="index-header">Split.li</h1>  
+    </div>
+    <div class="col-sm-12 newsfeed">
+      <div class="list-group">
+
+        <!--title/create new receipt bar -->
+          <div class="list-group-item active">
+            <%= form_for @receipt do |f| %>
+              <div class='row centered'>
+                <span class="col-sm-3 col-sm-offset-2 col-xs-11">
+                  <%= f.text_field :title, class: 'form-control', placeholder: 'title' %>
+                </span>
+                <br class="visible-xs">
+                <br class="visible-xs">
+                <br class="visible-xs">
+                <span class="col-sm-3 col-xs-11">
+                  <%= select_tag :split_type, "<option>Split Evenly</option><option>Itemize</option>".html_safe, class: 'form-control' %>
+                </span>
+                <br class="visible-xs">
+                <br class="visible-xs">
+                <br class="visible-xs">
+                <span class="col-sm-3 col-xs-11">
+                  <%= f.submit 'Create New Receipt', class: 'col-xs-12 btn btn-success' %>
+                </span>
+              </div>
+            <% end %>
+          </div>
+          <!-- display all receipts made by user -->
+          <% @receipts.each do |receipt| %>
+              <%= render 'receipts/receiptoverview', :receipt => receipt %>
+          <% end %>
+      </div>
+    </div>
+</div>

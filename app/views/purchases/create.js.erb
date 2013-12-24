@@ -1,0 +1,25 @@
+//Primary author: Ari Vogel
+//if a new purchase is created successfully
+<% if @purchase != nil and @purchase.id != nil %>
+    <% if @purchase_type == 'Split Evenly' %>
+        <% str = render "purchases/evensplitpurchase", purchase: @purchase%>
+    <% else %>
+        <% str = render "purchases/itemizedpurchase", purchase: @purchase%>
+    <% end %>
+    <% str.gsub!(/\n/, "") %>
+    var html = $.parseHTML('<%= str.html_safe %>')
+    $(html).appendTo("#fullReceipt");
+
+    //clear the input fields for next input
+    $("#owner_name").val('');
+    $("#owner_phone_number").val('');
+    $("#friend_error").text('');
+    $("#error-hidden").hide();
+//if a purchase is not successfully created
+<% else %>
+//clear the input fields for next input
+    $("#friend_error").text('There was a problem adding your friend. Make sure you are inputting a name and a valid phone number.');
+    $("#error-hidden").show();
+    $("#friend").val('');
+    $("#phone_number").val('');
+<% end %>

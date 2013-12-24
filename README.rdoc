@@ -1,0 +1,4 @@
+== README
+Split.li is an app that helps friends split the bill at a restaurant. Uses the Venmo API to charge those who do not front payment and to track owed money.
+
+Heroku URL: https://splitli.herokuapp.com/
